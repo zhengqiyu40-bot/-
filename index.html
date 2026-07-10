@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 改这里：浏览器标签页标题（一般写你的名字） -->
+<title>郑XX · 作品集</title>
+<!-- 改这里：这段是给搜索引擎和分享用的简介 -->
+<meta name="description" content="AI 产品经理，专注 AI 产品设计与落地。">
+<style>
+  :root{
+    --bg:#F6F7F9;
+    --surface:#FFFFFF;
+    --ink:#0E1116;
+    --ink-soft:#5A6472;
+    --line:#E4E7EC;
+    --accent:#2B4EFF;
+    --accent-soft:#EAEEFF;
+    --mono:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",Roboto,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* 顶部导航 */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,247,249,.82);
+    backdrop-filter:saturate(180%) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:920px;margin:0 auto;padding:16px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{font-weight:700;letter-spacing:.3px}
+  .navlinks{display:flex;gap:28px}
+  .navlinks a{font-size:14px;color:var(--ink-soft);transition:color .2s}
+  .navlinks a:hover,.navlinks a.active{color:var(--accent)}
+  @media(max-width:640px){.navlinks{display:none}}
+
+  main{max-width:920px;margin:0 auto;padding:0 24px}
+
+  /* 章节通用 */
+  section{padding:72px 0;border-bottom:1px solid var(--line)}
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:2px;
+    text-transform:uppercase;color:var(--accent);margin-bottom:14px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:attr(data-num);color:var(--ink-soft);font-weight:600}
+  h2{font-size:26px;font-weight:700;margin-bottom:24px;letter-spacing:-.3px}
+
+  /* Hero */
+  .hero{padding:96px 0 80px;border-bottom:1px solid var(--line)}
+  .hero .tag{
+    font-family:var(--mono);font-size:13px;color:var(--accent);
+    background:var(--accent-soft);padding:5px 12px;border-radius:100px;
+    display:inline-block;margin-bottom:22px;
+  }
+  .hero h1{font-size:clamp(34px,7vw,52px);line-height:1.15;letter-spacing:-1px;font-weight:800}
+  .hero h1 span{color:var(--accent)}
+  .hero p{font-size:18px;color:var(--ink-soft);margin-top:20px;max-width:560px}
+  .hero .cta{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    padding:12px 22px;border-radius:10px;font-size:15px;font-weight:600;
+    transition:transform .15s,box-shadow .2s;
+  }
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(43,78,255,.28)}
+  .btn-ghost{border:1px solid var(--line);background:var(--surface)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* 关于 */
+  .about p{font-size:17px;color:var(--ink-soft);max-width:640px}
+  .skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .skills span{
+    font-size:14px;padding:7px 14px;background:var(--surface);
+    border:1px solid var(--line);border-radius:8px;
+  }
+
+  /* 经历时间线 */
+  .timeline{border-left:2px solid var(--line);margin-left:6px}
+  .item{position:relative;padding:0 0 34px 28px}
+  .item:last-child{padding-bottom:0}
+  .item::before{
+    content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;
+    border-radius:50%;background:var(--accent);border:3px solid var(--bg);
+  }
+  .item .when{font-family:var(--mono);font-size:13px;color:var(--ink-soft)}
+  .item h3{font-size:18px;margin:4px 0 6px}
+  .item .role{color:var(--accent);font-weight:600}
+  .item p{color:var(--ink-soft);font-size:15px}
+
+  /* 项目卡片 */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:26px;transition:transform .2s,box-shadow .2s,border-color .2s;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(14,17,22,.08);border-color:var(--accent)}
+  .card .kicker{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:1px}
+  .card h3{font-size:19px;margin:10px 0 10px}
+  .card p{color:var(--ink-soft);font-size:15px}
+  .card .meta{margin-top:16px;font-size:13px;color:var(--ink-soft);font-family:var(--mono)}
+
+  /* 联系 */
+  .contact .links{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+  .contact a{
+    display:inline-flex;align-items:center;gap:12px;font-size:17px;width:fit-content;
+    padding-bottom:2px;border-bottom:1px solid transparent;transition:border-color .2s,color .2s;
+  }
+  .contact a:hover{color:var(--accent);border-color:var(--accent)}
+  .contact .lbl{font-family:var(--mono);font-size:13px;color:var(--ink-soft);min-width:64px}
+
+  footer{max-width:920px;margin:0 auto;padding:40px 24px 60px;color:var(--ink-soft);font-size:14px}
+
+  @media(prefers-reduced-motion:reduce){
+    *{transition:none!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <!-- 改这里：左上角显示的名字/标识 -->
+    <div class="brand">郑XX</div>
+    <div class="navlinks">
+      <a href="#about">关于</a>
+      <a href="#work">经历</a>
+      <a href="#projects">项目</a>
+      <a href="#contact">联系</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ============ Hero ============ -->
+  <div class="hero">
+    <!-- 改这里：一句话定位标签 -->
+    <span class="tag">AI 产品经理 · 深圳</span>
+    <!-- 改这里：主标题，<span>里的字会显示为蓝色高亮 -->
+    <h1>把复杂的 AI 能力，<br>变成好用的<span>产品</span>。</h1>
+    <!-- 改这里：一两句自我介绍 -->
+    <p>专注 AI 产品的设计与落地，从用户需求出发，用清晰的结构和可验证的指标推动产品从 0 到 1。</p>
+    <div class="cta">
+      <a href="#projects" class="btn btn-primary">查看项目</a>
+      <!-- 改这里：把 href 换成你的简历链接或邮箱 -->
+      <a href="#contact" class="btn btn-ghost">联系我</a>
+    </div>
+  </div>
+
+  <!-- ============ 关于 ============ -->
+  <section id="about" class="about">
+    <div class="eyebrow" data-num="01">About</div>
+    <h2>关于我</h2>
+    <!-- 改这里：3~5 句话介绍你自己 -->
+    <p>你好，我是郑XX。我在 AI 产品方向做过市场分析、用户研究、需求拆解到 PRD 落地的完整流程，也喜欢自己动手做原型验证想法。相信好的产品来自对真实场景的理解，而不是堆功能。</p>
+    <!-- 改这里：你的技能标签，可增删 -->
+    <div class="skills">
+      <span>需求分析</span>
+      <span>用户研究</span>
+      <span>PRD 撰写</span>
+      <span>数据指标</span>
+      <span>原型设计</span>
+      <span>AI 应用落地</span>
+    </div>
+  </section>
+
+  <!-- ============ 经历 ============ -->
+  <section id="work">
+    <div class="eyebrow" data-num="02">Experience</div>
+    <h2>经历</h2>
+    <div class="timeline">
+      <!-- 改这里：复制整个 .item 块可以增加更多条 -->
+      <div class="item">
+        <div class="when">2025 — 至今</div>
+        <h3><span class="role">AI 产品方向</span> · XX 项目</h3>
+        <p>负责从竞品分析、用户研究到 PRD 落地的完整流程，推动产品从概念到可用版本。</p>
+      </div>
+      <div class="item">
+        <div class="when">2024 — 2025</div>
+        <h3><span class="role">产品实践</span> · XX 经历</h3>
+        <p>参与需求梳理与原型验证，用数据和用户反馈迭代产品方向。</p>
+      </div>
+      <div class="item">
+        <div class="when">2023 — 2024</div>
+        <h3><span class="role">起步阶段</span> · XX 经历</h3>
+        <p>系统学习产品方法论，完成多个从 0 到 1 的练习项目。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 项目 ============ -->
+  <section id="projects">
+    <div class="eyebrow" data-num="03">Selected Work</div>
+    <h2>精选项目</h2>
+    <div class="grid">
+      <!-- 改这里：复制整个 .card 块可以增加更多项目 -->
+      <a class="card" href="#">
+        <div class="kicker">PRODUCT</div>
+        <h3>项目名称一</h3>
+        <p>一句话说明这个项目解决了什么问题、你做了什么、结果如何。</p>
+        <div class="meta">角色：产品经理 · 2025</div>
+      </a>
+      <a class="card" href="#">
+        <div class="kicker">PRODUCT</div>
+        <h3>项目名称二</h3>
+        <p>一句话说明这个项目解决了什么问题、你做了什么、结果如何。</p>
+        <div class="meta">角色：产品经理 · 2025</div>
+      </a>
+      <a class="card" href="#">
+        <div class="kicker">PROTOTYPE</div>
+        <h3>项目名称三</h3>
+        <p>一句话说明这个项目解决了什么问题、你做了什么、结果如何。</p>
+        <div class="meta">角色：设计 + 开发 · 2024</div>
+      </a>
+      <a class="card" href="#">
+        <div class="kicker">WRITING</div>
+        <h3>项目名称四</h3>
+        <p>一句话说明这个项目解决了什么问题、你做了什么、结果如何。</p>
+        <div class="meta">内容创作 · 2024</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ 联系 ============ -->
+  <section id="contact" class="contact" style="border-bottom:none">
+    <div class="eyebrow" data-num="04">Contact</div>
+    <h2>联系我</h2>
+    <div class="links">
+      <!-- 改这里：把下面的邮箱、链接换成你自己的 -->
+      <a href="mailto:you@example.com"><span class="lbl">邮箱</span>you@example.com</a>
+      <a href="#"><span class="lbl">微信</span>your_wechat_id</a>
+      <a href="https://github.com/yourname" target="_blank" rel="noopener"><span class="lbl">GitHub</span>github.com/yourname</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <!-- 改这里：底部版权 -->
+  © 2026 郑XX · 用 ❤ 与 HTML 手工搭建
+</footer>
+
+<script>
+  // 滚动时高亮当前所在的导航项（不用改）
+  const sections = document.querySelectorAll('section, .hero');
+  const links = document.querySelectorAll('.navlinks a');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const id = e.target.id;
+        links.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+id));
+      }
+    });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  sections.forEach(s=>obs.observe(s));
+</script>
+
+</body>
+</html>
