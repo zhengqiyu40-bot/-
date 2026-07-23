@@ -139,41 +139,6 @@
     font-family:var(--mono);letter-spacing:.5px;
   }
 
-  /* 作品集：可直接试玩的东西。用游戏自己的暗色调，和浅色页面拉开层次 */
-  .works-item{
-    background:#17141d;border:1px solid #2a2435;border-radius:14px;
-    overflow:hidden;color:#e8e0d0;
-  }
-  .works-cover{position:relative;display:block;line-height:0;background:#0d0b10}
-  .works-cover img{width:100%;height:auto;display:block;image-rendering:pixelated}
-  .works-play{
-    position:absolute;inset:0;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;gap:12px;cursor:pointer;
-    background:rgba(13,11,16,.55);transition:background .2s;border:0;width:100%;
-    font-family:inherit;color:#e8e0d0;
-  }
-  .works-play:hover{background:rgba(13,11,16,.3)}
-  .works-play .btn-play{
-    padding:12px 26px;border:2px solid #e0a04b;border-radius:8px;
-    color:#e0a04b;font-size:15px;font-weight:600;letter-spacing:2px;
-    background:rgba(13,11,16,.72);
-  }
-  .works-play small{font-size:12px;color:#a49ab5;letter-spacing:.5px}
-  .works-body{padding:24px 26px}
-  .works-body h3{font-size:19px;margin:0 0 6px;color:#e8e0d0}
-  .works-body .zh{font-size:13px;color:#7a7288;font-family:var(--mono);margin-bottom:14px}
-  .works-body p{color:#a49ab5;font-size:15px;margin-bottom:16px}
-  .works-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-  .works-tags span{
-    font-size:12px;padding:5px 11px;border:1px solid #2a2435;border-radius:6px;
-    color:#7a7288;font-family:var(--mono);
-  }
-  .works-links{display:flex;gap:18px;font-size:14px;flex-wrap:wrap}
-  .works-links a{color:#e0a04b;border-bottom:1px solid transparent;transition:border-color .2s}
-  .works-links a:hover{border-color:#e0a04b}
-  .works-frame{width:100%;height:760px;border:0;display:block;background:#0d0b10}
-  @media(max-width:640px){.works-frame{height:620px}}
-
   /* 联系 */
   .contact .links{display:flex;flex-direction:column;gap:14px;margin-top:8px}
   .contact a{
@@ -200,7 +165,6 @@
       <a href="#about">关于</a>
       <a href="#work">经历</a>
       <a href="#projects">项目</a>
-      <a href="#works">作品集</a>
       <a href="#contact">联系</a>
       <a href="resume.html">简历</a>
     </div>
@@ -316,54 +280,9 @@
     </div>
   </section>
 
-  <!-- ============ 作品集（可试玩） ============ -->
-  <section id="works">
-    <div class="eyebrow" data-num="04">Works</div>
-    <h2>作品集</h2>
-
-    <div class="works-item">
-      <!-- 封面点击后才加载 iframe，不拖慢首屏 -->
-      <div class="works-cover" id="gameCover">
-        <img src="works/cover.webp" width="560" height="408"
-             alt="地牢小勇者 II 游戏截图：冒险者营地，三名 NPC 与通往深渊的入口">
-        <button class="works-play" id="gamePlay" type="button">
-          <span class="btn-play">▶ 开始游戏</span>
-          <small>先在启动器设好奖惩规则，才能进入深渊 · 点进画面后键盘才生效</small>
-        </button>
-      </div>
-
-      <div class="works-body">
-        <h3>地牢小勇者 II · 深渊回响</h3>
-        <div class="zh">Roguelike · 2025</div>
-        <p>
-          自己写的像素地牢冒险游戏，配一套「深渊启动器」奖惩系统。<b>启动器在前、游戏在后</b>：
-          先选娱乐或惩罚模式、填好死亡与通关各自要跳去的网页，保存后深渊入口才解封 ——
-          角色一死，倒计时结束就把你踢去你自己指定的那一页。
-        </p>
-        <p>
-          游戏本体五层五主题（菌菇洞窟→钢铁城堡→亡者墓窟→克苏鲁深渊→血肉巢穴），
-          每层有专属怪物、陷阱和 Boss；火/冰/雷/毒四系元素宝石可叠加生效。
-          支持键盘、触屏和蓝牙手柄，可本地双人同屏。
-        </p>
-        <div class="works-tags">
-          <span>Canvas 2D</span>
-          <span>原生 JS</span>
-          <span>单文件 · 无依赖</span>
-          <span>奖惩启动器</span>
-          <span>双人同屏</span>
-          <span>手柄 / 触屏</span>
-        </div>
-        <div class="works-links">
-          <a href="works/launcher.html" target="_blank" rel="noopener">↗ 新窗口全屏玩</a>
-          <a href="#" id="gameClose" hidden>× 收起</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ 联系 ============ -->
   <section id="contact" class="contact" style="border-bottom:none">
-    <div class="eyebrow" data-num="05">Contact</div>
+    <div class="eyebrow" data-num="04">Contact</div>
     <h2>联系我</h2>
     <div class="links">
       <!-- 改这里：把下面的邮箱、链接换成你自己的 -->
@@ -400,33 +319,6 @@
   });
 </script>
 
-<script>
-  // 作品集：点封面才加载游戏 iframe，首屏不为 136KB 的游戏买单
-  (function(){
-    var cover = document.getElementById('gameCover');
-    var play  = document.getElementById('gamePlay');
-    var close = document.getElementById('gameClose');
-    if(!cover || !play) return;
-
-    play.addEventListener('click', function(){
-      var f = document.createElement('iframe');
-      f.className = 'works-frame';
-      // 先加载启动器；它的「进入深渊」按钮会在同一个 iframe 里换成游戏
-      f.src = 'works/launcher.html';
-      f.title = '深渊启动器 · 地牢小勇者 II';
-      f.allow = 'fullscreen; gamepad';
-      cover.replaceWith(f);
-      close.hidden = false;
-      f.addEventListener('load', function(){ f.contentWindow.focus(); }); // 让键盘立刻可用
-      cover = f;
-    });
-
-    close.addEventListener('click', function(e){
-      e.preventDefault();
-      location.reload();   // 收起=重载，顺便把游戏的音频和循环彻底停掉
-    });
-  })();
-</script>
 
 <script>
   // 滚动时高亮当前所在的导航项（不用改）
