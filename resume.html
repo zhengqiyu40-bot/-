@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>郑棋宇 · AI 产品经理 · 简历</title>
+<meta name="description" content="郑棋宇，AI 产品经理，广州。5 年 AI 产品与运营管理经验，专注物流场景 AI 落地。">
+<style>
+  :root{
+    --bg:#F6F7F9;
+    --surface:#FFFFFF;
+    --ink:#0E1116;
+    --ink-soft:#5A6472;
+    --line:#E4E7EC;
+    --accent:#2B4EFF;
+    --accent-soft:#EAEEFF;
+    --mono:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","HarmonyOS Sans SC",
+           "Source Han Sans SC","Noto Sans SC","Hiragino Sans GB",
+           "Microsoft YaHei UI","Microsoft YaHei","Segoe UI",Roboto,
+           "Helvetica Neue",Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:var(--sans);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.8;
+    letter-spacing:.02em;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* 顶部返回条 */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,247,249,.82);
+    backdrop-filter:saturate(180%) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .inner{
+    max-width:820px;margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .topbar a{font-size:14px;color:var(--ink-soft);transition:color .2s}
+  .topbar a:hover{color:var(--accent)}
+  .btn-print{
+    font:inherit;font-size:13px;cursor:pointer;
+    padding:7px 15px;border-radius:8px;
+    border:1px solid var(--line);background:var(--surface);color:var(--ink);
+    transition:border-color .2s,color .2s;
+  }
+  .btn-print:hover{border-color:var(--accent);color:var(--accent)}
+
+  main{max-width:820px;margin:0 auto;padding:0 24px 80px}
+
+  /* 抬头 */
+  .head{padding:52px 0 30px;border-bottom:1px solid var(--line)}
+  .head h1{font-size:clamp(30px,6vw,40px);font-weight:800;letter-spacing:0;line-height:1.3}
+  .head .role{
+    display:inline-block;margin-top:10px;
+    font-family:var(--mono);font-size:13px;color:var(--accent);
+    background:var(--accent-soft);padding:5px 12px;border-radius:100px;
+  }
+  .head .meta{margin-top:18px;color:var(--ink-soft);font-size:15px}
+  .head .contact{
+    margin-top:12px;display:flex;flex-wrap:wrap;gap:10px 26px;
+    font-size:14px;color:var(--ink-soft);
+  }
+  .head .contact b{font-family:var(--mono);font-weight:400;color:var(--ink)}
+
+  /* 章节 */
+  section{padding:38px 0;border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:none}
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:2px;
+    text-transform:uppercase;color:var(--accent);margin-bottom:12px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:attr(data-num);color:var(--ink-soft);font-weight:600}
+  h2{font-size:24px;font-weight:700;margin-bottom:20px}
+  section > p{color:var(--ink-soft);font-size:15.5px}
+
+  /* 雇主 / 岗位 */
+  .employer{margin-bottom:34px}
+  .employer:last-child{margin-bottom:0}
+  .employer > h3{
+    font-size:19px;font-weight:700;
+    padding-bottom:8px;border-bottom:2px solid var(--ink);display:inline-block;
+  }
+  .role-line{
+    display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+    gap:8px;margin:16px 0 10px;
+  }
+  .role-line .title{font-size:16px;font-weight:600;color:var(--accent)}
+  .role-line .when{font-family:var(--mono);font-size:13px;color:var(--ink-soft)}
+
+  /* 项目卡 */
+  .project{
+    background:var(--surface);border:1px solid var(--line);border-radius:12px;
+    padding:22px 24px;margin-top:16px;
+  }
+  .project > h4{
+    font-size:16px;font-weight:700;margin-bottom:4px;
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;
+  }
+  .project > h4 .when{font-family:var(--mono);font-size:12px;color:var(--ink-soft);font-weight:400}
+  .project .bg{color:var(--ink-soft);font-size:14.5px;margin:10px 0 4px}
+  .project h5{
+    font-size:13px;font-family:var(--mono);letter-spacing:1px;color:var(--ink-soft);
+    margin:18px 0 8px;text-transform:uppercase;
+  }
+  ul{list-style:none}
+  li{
+    position:relative;padding-left:18px;margin-bottom:9px;
+    color:var(--ink-soft);font-size:14.5px;
+  }
+  li::before{
+    content:"";position:absolute;left:2px;top:.72em;
+    width:5px;height:5px;border-radius:50%;background:var(--line);
+  }
+  li b{color:var(--ink);font-weight:600}
+  li:last-child{margin-bottom:0}
+
+  .plain-list li{font-size:15px}
+
+  /* 技能 */
+  .skills li{margin-bottom:12px;font-size:15px}
+
+  footer{
+    max-width:820px;margin:0 auto;padding:0 24px 60px;
+    color:var(--ink-soft);font-size:13px;
+  }
+
+  /* 打印 / 存为 PDF：去掉导航和背景，压紧排版 */
+  @media print{
+    @page{margin:14mm}
+    body{background:#fff;line-height:1.6;font-size:11.5pt}
+    .topbar,footer,canvas.ink-bg{display:none!important}
+    main{max-width:none;padding:0}
+    .head{padding-top:0}
+    section{padding:18px 0;break-inside:avoid}
+    .project{break-inside:avoid;border-color:#ddd;padding:14px 16px}
+    a{color:#000}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="inner">
+    <a href="index.html">← 返回主页</a>
+    <button class="btn-print" onclick="window.print()">打印 / 存为 PDF</button>
+  </div>
+</div>
+
+<main>
+
+  <header class="head">
+    <h1>郑棋宇</h1>
+    <div class="role">AI 产品经理</div>
+    <div class="meta">广州 · 5 年 AI 产品与运营管理经验</div>
+    <div class="contact">
+      <!-- 手机号刻意不公开：仓库是 public，写进来会永久留在 git 历史里。
+           需要电话的招聘方走邮箱联系即可。 -->
+      <span>邮箱 <b><a href="mailto:zhengqiyu40@gmail.com">zhengqiyu40@gmail.com</a></b></span>
+      <span>教育背景 <b>本科</b></span>
+    </div>
+  </header>
+
+  <!-- ============ 个人简介 ============ -->
+  <section>
+    <div class="eyebrow" data-num="01">Summary</div>
+    <h2>个人简介</h2>
+    <p>
+      5 年顺丰体系工作经验，现聚焦 AI 产品方向。从配送站管培生成长为副站长，核心职责涵盖站点运营、
+      团队管理与破损理赔处理，积累了扎实的业务运营与管理经验；后转型 AI 产品经理，在资深产品指导下
+      参与视觉识别（YOLO）与 NLP 两类 AI 产品从 0 到 1 的设计与试点落地，推动中转场违规行为识别、
+      理赔证据自动追溯与车队安全监控等场景落地见效。擅长将业务问题转化为可落地的模型规则与产品方案，
+      具备需求调研、PRD／原型设计、数据标注管理、跨算法—研发—业务多方协同的 AI 产品能力。
+    </p>
+  </section>
+
+  <!-- ============ 工作经历 ============ -->
+  <section>
+    <div class="eyebrow" data-num="02">Experience</div>
+    <h2>工作经历</h2>
+
+    <div class="employer">
+      <h3>广州顺丰枢纽 · AI 管控平台团队</h3>
+      <div class="role-line">
+        <span class="title">AI 产品经理</span>
+        <span class="when">2023.03 — 2026.05</span>
+      </div>
+
+      <!-- 项目一 -->
+      <div class="project">
+        <h4>项目一：中转场 AI 管控平台（违规识别与理赔追溯）<span class="when">2024.03 — 2026.05</span></h4>
+        <p class="bg">
+          针对中转场暴力装卸导致的货损与理赔追责难问题，在高级 AI 产品经理指导下，作为初级 AI 产品经理
+          参与管控平台两大 AI 模块的产品设计与落地：① 基于 YOLO 视觉模型识别操作人员违规行为，自动记录
+          并关联人员身份实现追溯；② 基于 NLP 解析用户理赔诉求，自动判别理赔类型并调取对应追溯证据，
+          关联至运单号。
+        </p>
+
+        <h5>核心职责</h5>
+        <ul>
+          <li><b>需求调研与规则梳理</b>：在导师指导下深入中转场与理赔客服一线，协助梳理违规操作行为清单与理赔意图分类体系，参与竞品分析报告及 PRD 撰写，整理 YOLO 违规判定规则与 NLP 意图—证据映射逻辑。</li>
+          <li><b>产品流程与方案设计</b>：围绕「识别—告警—取证—理赔」梳理端到端产品流程，重点设计理赔追溯链路：NLP 判别理赔意图后，按意图—证据映射规则自动调取追溯证据、关联运单号生成理赔工单；参与三大核心模块的功能原型设计。</li>
+          <li><b>数据策略与标注管理</b>：承接两套模型的数据标注规范落地与标注质量把控，配合算法团队推进模型训练选型与调优。</li>
+          <li><b>跨职能协同与版本迭代</b>：对接算法、研发、测试、业务多方推进版本迭代，跟进摄像头／运单／工单系统接口打通，整理试点中转场运行数据与误报 badcase 归因分析，支撑产品持续迭代优化。</li>
+        </ul>
+
+        <h5>关键成果</h5>
+        <ul>
+          <li><b>需求与规则体系产出</b>：访谈操作人员 18 名、理赔客服 6 名，梳理违规行为 8 类及理赔意图 5 类；竞品分析覆盖海康威视、旷视、极视角等 7 家，产出 YOLO 违规判定规则 26 条、NLP 意图—证据映射规则 15 条，PRD 一次性通过业务方评审。</li>
+          <li><b>产品交付与模型指标</b>：完成 3 大核心模块共 17 个功能页面的原型设计；标注行为识别视频片段 8,000+ 段、理赔语料 12,000+ 条，配合算法团队完成 YOLOv8 违规识别与 NLP 意图分类模型的训练与调优。</li>
+          <li><b>试点业务价值</b>：推进 3 个版本迭代，打通 3 方系统接口，2 个试点中转场上线运行——实现违规行为主动识别、理赔证据自动调取与工单联动，推动迭代优化需求 14 项，项目二期已进入排期。</li>
+        </ul>
+      </div>
+
+      <!-- 项目二 -->
+      <div class="project">
+        <h4>项目二：司机安全驾驶智能监控平台<span class="when">2023.03 — 2024.03</span></h4>
+        <p class="bg">
+          为保障司机安全驾驶与货物准时送达，在高级 AI 产品经理指导下，参与基于车载传感器、GPS 与 DMS
+          摄像头的监控平台产品规划：碰撞／侧翻自动上报并联动就近救援、驾驶行为打分与绩效激励、
+          疲劳／分心状态语音提醒、车辆故障自动调度就近仓库车辆转运货物。
+        </p>
+
+        <h5>核心职责</h5>
+        <ul>
+          <li><b>用户研究与场景建模</b>：走访一线司机与指挥中心，协助梳理事故报警、驾驶打分、疲劳监测、故障转运四类场景的现状与痛点，参与竞品分析及产品需求文档撰写。</li>
+          <li><b>策略规则与软硬件选型</b>：参与制定急加速、急刹车、超速等驾驶行为打分规则，整理摄像头状态监测与语音提醒的触发映射关系，配合技术团队完成 GPS、传感器、摄像头的硬件选型与监控系统搭建。</li>
+          <li><b>标注策略与数据安排</b>：制定 DMS 驾驶员状态识别（疲劳、分心等）的标注策略，明确各状态的判定标准与标注规范，统筹标注批次安排与质检抽检机制，保障模型训练数据质量。</li>
+          <li><b>试点验证与数据闭环</b>：对接研发、测试、车队三方推进开发落地，跟踪首批车队试点数据，支撑基于反馈的迭代优化。</li>
+        </ul>
+
+        <h5>关键成果</h5>
+        <ul>
+          <li><b>痛点图谱与竞品洞察</b>：访谈一线司机 12 名、指挥中心调度员 5 名，梳理四类场景 47 项现存痛点；输出覆盖 G7 物联、锐明技术、径卫视觉等 5 家的竞品分析报告及 PRD 1 份，获业务方评审通过。</li>
+          <li><b>策略与系统落地</b>：制定 5 维度驾驶行为打分规则（急加速、急刹车、急转弯、超速、怠速）及司机绩效激励机制，定义 13 条状态—提醒触发映射规则；完成 GPS 模块、DMS 摄像头、碰撞传感器的选型与供应商比价，推动监控系统完成搭建并进入联调。</li>
+          <li><b>业务效果验证</b>：协调研发、测试与 2 个试点车队推进，完成首批车队试点运行，验证事故预警、驾驶打分与故障转运的闭环效果，推动二期需求排期 6 项。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="employer">
+      <h3>顺丰速运</h3>
+
+      <div class="role-line">
+        <span class="title">配送站副站长</span>
+        <span class="when">2022.04 — 2023.02</span>
+      </div>
+      <ul class="plain-list">
+        <li><b>站点运营</b>：主持早晚会，统筹排班与收派任务，盯紧时效、妥投、破损、投诉等核心 KPI，推进大促期间运力保障方案落地。</li>
+        <li><b>团队管理</b>：统筹快递员考勤、绩效核算与新人带教，处理团队矛盾，有效控制人员流失。</li>
+        <li><b>工具化改善</b>：秉持「善用工具解决一线问题」的思路，主动引入并自研轻量化辅助工具与数据统计手段，将排班、破损统计等重复性人工环节流程化、可视化，有效降低运营成本、提升站点整体效能。</li>
+        <li><b>客诉与合规</b>：处理升级投诉、疑难件与遗失破损理赔，落实站点安全生产与车辆装卸规范，对接总部稽查问题整改。</li>
+        <li><b>经营分析</b>：管控耗材、油费等运营成本，分析单量与经营数据支撑站长决策；站长外出期间全面代管站点运作。</li>
+        <li><b>能力认可与转岗</b>：因运营改善成效与技术钻研能力获认可，经内部引荐调任广州顺丰枢纽，转型初级产品经理。</li>
+      </ul>
+
+      <div class="role-line">
+        <span class="title">管培生（储备干部）</span>
+        <span class="when">2021.03 — 2022.04</span>
+      </div>
+      <ul class="plain-list">
+        <li><b>运营协助</b>：协助排班调度与时效、妥投、破损、投诉等 KPI 监控及异常处理。</li>
+        <li><b>客户与经营</b>：处理日常客诉，维护片区大客户与商家关系，参与成本管控与经营数据分析。</li>
+        <li><b>晋升记录</b>：因业务熟悉度与管理能力表现突出，一年内晋升为配送站副站长。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 专业技能 ============ -->
+  <section>
+    <div class="eyebrow" data-num="03">Skills</div>
+    <h2>专业技能</h2>
+    <ul class="skills">
+      <li><b>产品能力</b>：需求调研与访谈、竞品分析、PRD 撰写、产品原型设计、MVP 规划与版本迭代管理。</li>
+      <li><b>AI 协同能力</b>：熟悉 YOLO 视觉识别与 NLP 意图分类的产品化流程，具备数据标注规范制定、标注质量管理及模型指标（mAP／F1／误报率）评估经验。</li>
+      <li><b>业务理解</b>：5 年物流行业经验，精通快递末端与中转场全链路业务，擅长将一线痛点转化为产品方案。</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>© 2026 郑棋宇 · <a href="index.html">返回主页</a></footer>
+
+<!-- 和主页同一套水墨背景，但更淡，避免影响简历阅读 -->
+<script src="ink-bg.js"></script>
+<script>
+  InkBackground.create({
+    paper:'#F6F7F9', ink:'#2B4EFF',
+    maxInk:0.22,          // 简历页以可读性优先，墨色压得比主页更淡
+    curl:16, buoyancy:0, density:6, splatForce:1050, grain:0,
+    idle:false            // 不自动飘烟，静态时保持干净
+  });
+</script>
+
+</body>
+</html>

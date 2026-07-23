@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>水墨互动背景 · 预览</title>
+<style>
+  :root{
+    --paper:#F2F1EC;
+    --ink:#1A1916;
+    --soft:#6B6862;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","HarmonyOS Sans SC",
+                "Source Han Sans SC","Noto Sans SC","Hiragino Sans GB",
+                "Microsoft YaHei UI","Microsoft YaHei","Segoe UI",Roboto,sans-serif;
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+  }
+
+  .stage{
+    position:relative;height:100%;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    text-align:center;padding:24px;
+    pointer-events:none;              /* 让鼠标事件穿透到背景 */
+  }
+  .stage h1{
+    font-size:clamp(44px,11vw,120px);
+    font-weight:400;letter-spacing:.22em;text-indent:.22em;
+    line-height:1.2;
+  }
+  .stage .sub{
+    margin-top:18px;font-size:clamp(13px,2.4vw,16px);
+    letter-spacing:.34em;text-indent:.34em;color:var(--soft);
+    text-transform:uppercase;
+  }
+  .stage .hint{
+    margin-top:44px;font-size:13px;color:var(--soft);opacity:.75;letter-spacing:.08em;
+  }
+
+  /* 调参面板 */
+  .panel{
+    position:fixed;right:20px;top:20px;width:250px;z-index:10;
+    background:rgba(255,255,255,.74);
+    backdrop-filter:blur(12px) saturate(160%);
+    border:1px solid rgba(26,25,22,.1);
+    border-radius:12px;padding:16px 18px;
+    font-size:12px;color:var(--soft);
+    box-shadow:0 10px 34px rgba(26,25,22,.07);
+  }
+  .panel h2{
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink);font-weight:600;margin-bottom:14px;
+  }
+  .row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px}
+  .row label{flex:0 0 76px}
+  .row input[type=range]{flex:1;accent-color:var(--ink);height:2px}
+  .row output{flex:0 0 40px;text-align:right;font-variant-numeric:tabular-nums}
+  .panel .foot{
+    margin-top:14px;padding-top:12px;border-top:1px solid rgba(26,25,22,.1);
+    display:flex;gap:8px;
+  }
+  .panel button{
+    flex:1;font:inherit;color:var(--ink);cursor:pointer;
+    background:rgba(26,25,22,.05);border:1px solid rgba(26,25,22,.12);
+    border-radius:7px;padding:6px 0;transition:background .15s;
+  }
+  .panel button:hover{background:rgba(26,25,22,.1)}
+  .panel .toggle{
+    position:fixed;right:20px;top:20px;width:auto;padding:7px 12px;cursor:pointer;
+  }
+  @media(max-width:640px){.panel{display:none}}
+
+  .fallback{
+    position:fixed;left:0;right:0;bottom:22px;text-align:center;
+    font-size:12px;color:var(--soft);display:none;
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <h1>墨</h1>
+  <div class="sub">move your cursor</div>
+  <div class="hint">移动鼠标搅动墨色 · 点击一下会炸开 · 静置几秒它会自己飘</div>
+</div>
+
+<div class="panel" id="panel">
+  <h2>Parameters</h2>
+  <div class="row"><label>卷曲</label><input type="range" id="curl"      min="0"   max="90"  step="1"    value="48"><output>48</output></div>
+  <div class="row"><label>浮力</label><input type="range" id="buoyancy"  min="0"   max="1600" step="10"  value="600"><output>600</output></div>
+  <div class="row"><label>消散</label><input type="range" id="dyeDiss"   min="0.1" max="3"   step="0.02" value="0.75"><output>0.75</output></div>
+  <div class="row"><label>浓度</label><input type="range" id="density"   min="0.5" max="6"   step="0.1"  value="2.2"><output>2.2</output></div>
+  <div class="row"><label>笔触</label><input type="range" id="radius"    min="0.0004" max="0.008" step="0.0002" value="0.0022"><output>0.0022</output></div>
+  <div class="row"><label>力度</label><input type="range" id="force"     min="400" max="6000" step="50" value="2000"><output>2000</output></div>
+  <div class="row"><label>颗粒</label><input type="range" id="grain"     min="0"   max="0.2" step="0.005" value="0.05"><output>0.05</output></div>
+  <div class="foot">
+    <button id="clear">洗纸</button>
+    <button id="hide">收起</button>
+  </div>
+</div>
+
+<div class="fallback" id="fallback">你的浏览器不支持 WebGL2，背景已降级为纯色。</div>
+
+<script src="ink-bg.js"></script>
+<script>
+  var bg = InkBackground.create();
+
+  if (!bg.supported) {
+    document.getElementById('fallback').style.display = 'block';
+    document.getElementById('panel').style.display = 'none';
+  } else {
+    // 滑杆直接改 options，下一帧就生效
+    [['curl','curl'],['buoyancy','buoyancy'],['dyeDiss','dyeDissipation'],
+     ['density','density'],['radius','splatRadius'],['force','splatForce'],
+     ['grain','grain']].forEach(function(pair){
+      var el = document.getElementById(pair[0]);
+      var out = el.nextElementSibling;
+      el.addEventListener('input', function(){
+        bg.options[pair[1]] = parseFloat(el.value);
+        out.textContent = el.value;
+      });
+    });
+
+    // 洗纸：重建一次
+    document.getElementById('clear').addEventListener('click', function(){
+      var opts = {};
+      for (var k in bg.options) opts[k] = bg.options[k];
+      opts.intro = false;
+      bg.destroy();
+      bg = InkBackground.create(opts);
+    });
+
+    var panel = document.getElementById('panel');
+    document.getElementById('hide').addEventListener('click', function(){
+      panel.innerHTML = '<span>参数</span>';
+      panel.className = 'panel toggle';
+      panel.onclick = function(){ location.reload(); };
+    });
+  }
+</script>
+
+</body>
+</html>
